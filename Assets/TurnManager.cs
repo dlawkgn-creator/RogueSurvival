@@ -1,0 +1,19 @@
+using UnityEngine;
+
+public class TurnManager
+{
+    private int m_TurnCount;
+
+    public TurnManager()        //현재 턴 1턴으로 초기화
+    {
+        m_TurnCount = 1;
+    }
+
+    public void Tick()      //현재턴을 출력하는메소드
+    {
+        m_TurnCount += 1;
+        Debug.Log("Current turn count:" + m_TurnCount);
+    }
+
+
+}
