@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< Updated upstream:Assets/Resources/Sprites/SnowTheme2 1.png.meta
 guid: 173d6b9ab18482a4b9417526416c7957
+=======
+guid: a2147d8dc29dc2641b104ee96be54e6d
+>>>>>>> Stashed changes:Assets/Roguelike2D/TutorialAssets/Sprites/SnowTheme2.png.meta
 TextureImporter:
   internalIDToNameTable:
   - first:

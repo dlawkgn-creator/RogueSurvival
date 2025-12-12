@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< Updated upstream:Assets/Resources/Animation.meta
 guid: 1745247ab7229254494623ccbddc589c
+=======
+guid: 853b08e1d4e610342bb6029e383ff149
+>>>>>>> Stashed changes:Assets/Roguelike2D/TutorialAssets/Sprites/UI.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

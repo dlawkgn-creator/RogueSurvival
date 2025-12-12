@@ -1,6 +1,10 @@
 fileFormatVersion: 2
+<<<<<<< Updated upstream:Assets/Resources/Animation/Enemy.meta
 guid: 64b85ecb73b888f4ea4e3dfa89804a61
 folderAsset: yes
+=======
+guid: b030dbfc9e9a7724ea8c28baef9c568d
+>>>>>>> Stashed changes:Assets/Scenes/SampleScene.unity.meta
 DefaultImporter:
   externalObjects: {}
   userData: 
