@@ -4,7 +4,7 @@ Unity 6 (URP) 기반의 2D 로그라이크 프로젝트입니다.
 Unity Learn의 공식 2D Rouelike Tutorial 을 따라 프로젝트 구조와 기본 세팅을 구성했습니다.
 
 ## Development Environment
-- **Engine**: Unity 6 (6.x LTS)
+- **Engine**: Unity 6 (6000.2.10f1)
 - **Render Pipeline**: Universal Render Pipeline (URP)
 - **Renderer**: 2D Renderer
 - **Platform**: PC (Windows)
