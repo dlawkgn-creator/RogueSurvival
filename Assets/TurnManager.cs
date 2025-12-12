@@ -9,7 +9,7 @@ public class TurnManager
         m_TurnCount = 1;
     }
 
-    public void Tick()      //현재턴을 출력하는메소드
+    public void Tick()      //현재 턴을 출력하는메소드
     {
         m_TurnCount += 1;
         Debug.Log("Current turn count:" + m_TurnCount);
