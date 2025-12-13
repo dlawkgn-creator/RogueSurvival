@@ -1,4 +1,0 @@
-repository "Roguelike/Roguelike@14569674399862@cloud"
-  path "/"
-    br "/main"
-    co "/main"
