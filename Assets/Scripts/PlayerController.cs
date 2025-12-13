@@ -1,7 +1,9 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-// 플레이어를 보드 위에서 움직이는 컨트롤러
+/// <summary>
+/// 플레이어를 보드 위에서 움직이는 컨트롤러
+/// </summary>
 public class PlayerController : MonoBehaviour
 {
     // 현재 플레이어가 올라가 있는 보드를 기억
