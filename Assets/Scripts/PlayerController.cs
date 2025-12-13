@@ -66,6 +66,7 @@ public class PlayerController : MonoBehaviour
             // 셀이 존재하고, 통과 가능한 칸일 때만 실제로 이동
             if (cellData != null && cellData.Passable)
             {
+                GameManager.Instance.TurnManager.Tick();
                 MoveTo(newCellTarget);
             }
         }

@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
     public BoardManager BoardManager;
     public PlayerController PlayerController;
 
-    private TurnManager m_TurnManager;
+    public TurnManager TurnManager { get; private set; }
 
     private void Awake()
     {
@@ -30,7 +30,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         // 시작할 때 새로운 TurnManager를 생성
-        m_TurnManager = new TurnManager();      
+        TurnManager = new TurnManager();      
 
         BoardManager.Init();
 

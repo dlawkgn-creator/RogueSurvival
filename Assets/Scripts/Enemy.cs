@@ -28,12 +28,12 @@ public class Enemy : CellObject
     public override bool PlayerWantsToEnter()
     {
         m_CurrentHealth -= 1; // 플레이어가 적이 있는 칸으로 이도하려 할때 체력 감소
-
+    
         if (m_CurrentHealth <= 0)
         {
             Destroy(gameObject);
         }
-
+    
         return false; // 적이 있는 칸으로 이동 불가
     }
 

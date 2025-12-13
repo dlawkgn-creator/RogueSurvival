@@ -18,15 +18,19 @@ public class BoardManager : MonoBehaviour
 
     // 실제 타일을 그려줄 Tilemap 컴포넌트
     private Tilemap m_Tilemap;
+    private Grid m_Grid;
 
     public int Width;
     public int Height;
     public Tile[] GroundTiles;
     public Tile[] WallTiles;
 
-    void Start()
+    public WallObject WallPrefab;
+
+    public void Init()
     {
         m_Tilemap = GetComponentInChildren<Tilemap>();
+        m_Grid = GetComponentInChildren<Grid>();
 
         // 보드 크기만큼 CellData 배열 생성
         m_BoardData = new CellData[Width, Height];
@@ -61,7 +65,52 @@ public class BoardManager : MonoBehaviour
 
                 // Tilemap 의 (x, y) 위치에 타일 배치
                 m_Tilemap.SetTile(new Vector3Int(x, y, 0), tile);
+
+                GenerateWall();
+                //GenerateFood(); // Food 파트 작업 완료시 주석 풀어야함
             }
         }
+    }
+
+    public Vector3 CellToWorld(Vector2Int cellIndex)
+    {
+        return m_Grid.GetCellCenterWorld((Vector3Int)cellIndex);
+    }
+
+    public CellData GetCellData(Vector2Int cellIndex)
+    {
+        if (cellIndex.x < 0 || cellIndex.x >= Width
+           || cellIndex.y < 0 || cellIndex.y >= Height)
+        {
+            return null;
+        }
+
+        return m_BoardData[cellIndex.x, cellIndex.y];
+    }
+
+    void GenerateWall()
+    {
+        int wallCount = Random.Range(6, 10);
+        for (int i = 0; i < wallCount; ++i)
+        {
+            int randomIndex = Random.Range(0, m_EmptyCellsList.Count);
+            Vector2Int coord = m_EmptyCellsList[randomIndex];
+
+            m_EmptyCellsList.RemoveAt(randomIndex);
+            CellData data = m_BoardData[coord.x, coord.y];
+            WallObject newWall = Instantiate(WallPrefab);
+
+            //init the wall
+            newWall.Init(coord);
+
+            newWall.transform.position = CellToWorld(coord);
+
+            data.ContainedObject = newWall;
+        }
+    }
+
+    public void SetCellTile(Vector2Int cellIndex, Tile tile)
+    {
+        m_Tilemap.SetTile(new Vector3Int(cellIndex.x, cellIndex.y, 0), tile);
     }
 }
