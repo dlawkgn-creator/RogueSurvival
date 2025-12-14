@@ -15,5 +15,8 @@ public class TurnManager
     {
         m_TurnCount += 1;
         Debug.Log($"현재 Turn : {m_TurnCount}");
+
+        // 턴이 발생했음을 알림
+        OnTick?.Invoke();
     }
 }

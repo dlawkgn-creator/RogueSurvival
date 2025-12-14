@@ -65,6 +65,9 @@ ProjectSettings/Packages/com.unity.testtools.codecoverage/
 # Unity3D generated file on crash reports
 sysinfo.txt
 
+# Mono auto generated files
+mono_crash.*
+
 # Builds
 *.apk
 *.aab
@@ -75,8 +78,17 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
+# TestRunner generated files
+InitTestScene*.unity*
+
 # Packed Addressables
 /[Aa]ssets/[Aa]ddressable[Aa]ssets[Dd]ata/*/*.bin*
+
+# Visual Scripting auto-generated files
+/[Aa]ssets/Unity.VisualScripting.Generated/VisualScripting.Flow/UnitOptions.db
+/[Aa]ssets/Unity.VisualScripting.Generated/VisualScripting.Flow/UnitOptions.db.meta
+/[Aa]ssets/Unity.VisualScripting.Generated/VisualScripting.Core/Property Providers
+/[Aa]ssets/Unity.VisualScripting.Generated/VisualScripting.Core/Property Providers.meta
 
 # Temporary auto-generated Android Assets
 /[Aa]ssets/[Ss]treamingAssets/aa.meta

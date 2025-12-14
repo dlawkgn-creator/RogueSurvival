@@ -81,7 +81,7 @@ public class Enemy : CellObject
             || (yDist == 0 && absXDist == 1))
         {
             // 플레이어의 자원(음식) 감소
-            GameManager.Instance.ChangeFood(3);
+            GameManager.Instance.ChangeFood(-3);
         }
         else
         {
