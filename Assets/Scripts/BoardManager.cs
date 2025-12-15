@@ -1,9 +1,6 @@
 using UnityEngine;
 using UnityEngine.Tilemaps;
-
-Susing System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.Tilemaps;
+using System.Collections.Generic;
 
 /// <summary>
 /// 게임 보드(Map)를 생성하고 관리하는 클래스
@@ -149,7 +146,6 @@ public class BoardManager : MonoBehaviour
             CellData data = m_BoardData[coord.x, coord.y];
             WallObject newWall = Instantiate(WallPrefab);
 
-            //init the wall
             newWall.Init(coord);
 
             newWall.transform.position = CellToWorld(coord);
