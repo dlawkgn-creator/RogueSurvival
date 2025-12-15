@@ -22,7 +22,10 @@ public class PlayerController : MonoBehaviour
     public void Spawn(BoardManager boardManager, Vector2Int cell)
     {
         m_Board = boardManager;
-        MoveTo(cell);
+        m_CellPosition = cell;
+
+        // 보드 셀 위치에 맞는 월드 좌표로 플레이어 이동
+        transform.position = m_Board.CellToWorld(cell);
     }
 
     // 셀 좌표 기준으로 위치를 옮기는 함수
