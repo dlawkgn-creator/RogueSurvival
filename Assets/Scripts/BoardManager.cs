@@ -1,4 +1,7 @@
-using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.Tilemaps;
+
+Susing System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -25,6 +28,9 @@ public class BoardManager : MonoBehaviour
     private Tilemap m_Tilemap;
     private Grid m_Grid;
 
+    // 플레이어 스폰 및 제어용 컨트롤러
+    public PlayerController Player;
+
     public int Width;
     public int Height;
     public Tile[] GroundTiles;
@@ -32,6 +38,39 @@ public class BoardManager : MonoBehaviour
 
     public WallObject WallPrefab;
     public FoodObject FoodPrefab;
+
+    // 첫 프레임 업데이트 이전에 한 번 호출
+    void Start()
+    {
+        m_Tilemap = GetComponentInChildren<Tilemap>();
+        m_Grid = GetComponentInChildren<Grid>();
+
+        m_BoardData = new CellData[Width, Height];
+
+        for (int y = 0; y < Height; ++y)
+        {
+            for (int x = 0; x < Width; ++x)
+            {
+                Tile tile;
+                m_BoardData[x, y] = new CellData();
+
+                if (x == 0 || y == 0 || x == Width - 1 || y == Height - 1)
+                {
+                    tile = WallTiles[Random.Range(0, WallTiles.Length)];
+                    m_BoardData[x, y].Passable = false;
+                }
+                else
+                {
+                    tile = GroundTiles[Random.Range(0, GroundTiles.Length)];
+                    m_BoardData[x, y].Passable = true;
+                }
+
+                m_Tilemap.SetTile(new Vector3Int(x, y, 0), tile);
+            }
+        }
+
+        Player.Spawn(this, new Vector2Int(1, 1));
+    }
 
     public void Init()
     {
