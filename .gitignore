@@ -12,7 +12,7 @@
 /[Uu]ser[Ss]ettings/
 
 # Unity Version Control (Plastic SCM)
-.plastic/
+.plastic/**
 
 *.log
 
