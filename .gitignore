@@ -96,3 +96,5 @@ InitTestScene*.unity*
 
 # DownloadAssets Folder Ignore
 Assets/DownloadAssets/
+Assets/Resources/Animation/Player.meta
+Assets/Resources/Animation/Player.meta
