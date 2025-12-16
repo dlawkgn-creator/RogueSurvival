@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using System.Collections.Generic;
-using UnityEditor.SceneManagement;
 
 /// <summary>
 /// 게임 보드(Map)를 생성하고 관리하는 클래스
@@ -29,48 +28,23 @@ public class BoardManager : MonoBehaviour
     // 플레이어 스폰 및 제어용 컨트롤러
     public PlayerController Player;
 
-    public int Width;
-    public int Height;
+    [Header("Board")]
+    public int Width = 10;
+    public int Height = 10;
     public Tile[] GroundTiles;
     public Tile[] WallTiles;
 
+    [Header("Prefabs")]
     public WallObject WallPrefab;
     public FoodObject FoodPrefab;
-
-    // Exit 타일 설정(신은지)
     public ExitCellObject ExitCellPrefab;
 
-    // 첫 프레임 업데이트 이전에 한 번 호출
-    void Start()
+    void Awake()
     {
         m_Tilemap = GetComponentInChildren<Tilemap>();
         m_Grid = GetComponentInChildren<Grid>();
 
         m_BoardData = new CellData[Width, Height];
-
-        for (int y = 0; y < Height; ++y)
-        {
-            for (int x = 0; x < Width; ++x)
-            {
-                Tile tile;
-                m_BoardData[x, y] = new CellData();
-
-                if (x == 0 || y == 0 || x == Width - 1 || y == Height - 1)
-                {
-                    tile = WallTiles[Random.Range(0, WallTiles.Length)];
-                    m_BoardData[x, y].Passable = false;
-                }
-                else
-                {
-                    tile = GroundTiles[Random.Range(0, GroundTiles.Length)];
-                    m_BoardData[x, y].Passable = true;
-                }
-
-                m_Tilemap.SetTile(new Vector3Int(x, y, 0), tile);
-            }
-        }
-
-        Player.Spawn(this, new Vector2Int(1, 1));
     }
 
     public void Init()
@@ -79,40 +53,33 @@ public class BoardManager : MonoBehaviour
         m_Grid = GetComponentInChildren<Grid>();
 
         m_EmptyCellsList = new List<Vector2Int>();
-        // 보드 크기만큼 CellData 배열 생성
+
         m_BoardData = new CellData[Width, Height];
 
         for (int y = 0; y < Height; ++y)
         {
             for (int x = 0; x < Width; ++x)
             {
-                // 현재 좌표에 배치할 타일
                 Tile tile;
 
-                // 각 칸마다 CellData 객체 생성
                 m_BoardData[x, y] = new CellData();
 
-                // 맵의 가장자리(테두리)인지 검사
                 if (x == 0 || y == 0 || x == Width - 1 || y == Height - 1)
                 {
-                    // 벽 타일 중 하나를 랜덤으로 선택
+
                     tile = WallTiles[Random.Range(0, WallTiles.Length)];
 
-                    // 해당 칸은 이동 불가
                     m_BoardData[x, y].Passable = false;
                 }
                 else
                 {
-                    // 바닥 타일 중 하나를 랜덤으로 선택
                     tile = GroundTiles[Random.Range(0, GroundTiles.Length)];
 
-                    // 해당 칸은 이동 불가
                     m_BoardData[x, y].Passable = true;
 
                     m_EmptyCellsList.Add(new Vector2Int(x, y));
                 }
 
-                // Tilemap 의 (x, y) 위치에 타일 배치
                 m_Tilemap.SetTile(new Vector3Int(x, y, 0), tile);
 
             }
