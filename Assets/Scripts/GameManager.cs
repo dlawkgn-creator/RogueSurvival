@@ -22,6 +22,12 @@ public class GameManager : MonoBehaviour
     public UIDocument UIDoc;
     private Label m_FoodLabel;
 
+    //신은지 작업
+    private int m_CurrentLevel = 1;
+
+    private VisualElement m_GameOverPanel;
+    private Label m_GameOverMessage;
+
     private void Awake()
     {
         if(Instance != null)
@@ -46,8 +52,37 @@ public class GameManager : MonoBehaviour
 
         // BoardManager와 2d x축 y축을 매개로 PlayerController 의 Spawn메서드로 캐릭터를 생성
         PlayerController.Spawn(BoardManager, new Vector2Int(1, 1));
+
+        NewLevel();
+
+        m_FoodLabel = UIDoc.rootVisualElement.Q<Label>("FoodLabel");
+        m_FoodLabel.text = "Food : " + m_FoodAmount;
+
+        //신은지 작업
+        m_GameOverPanel = UIDoc.rootVisualElement.Q<VisualElement>("GameOverPanel");
+        m_GameOverMessage = m_GameOverPanel.Q<Label>("GameOverMessage");
+
+        m_GameOverPanel.style.visibility = Visibility.Hidden;
+
+        StartNewGame();
+
     }
-    
+
+    public void StartNewGame()
+    {
+        m_GameOverPanel.style.visibility = Visibility.Hidden;
+
+        m_CurrentLevel = 1;
+        m_FoodAmount = 20;
+        m_FoodLabel.text = "Food : " + m_FoodAmount;
+
+        BoardManager.Clean();
+        BoardManager.Init();
+
+        PlayerController.Init();
+        PlayerController.Spawn(BoardManager, new Vector2Int(1, 1));
+    }
+
     // 턴마다 음식 감소 처리
     private void OnTurnHappen()
     {
@@ -61,10 +96,31 @@ public class GameManager : MonoBehaviour
         Food += amount;
         Debug.Log($"Food : {Food}");
 
-        if(Food <= 0)
+        if (Food <= 0)
         {
             Debug.Log("Game Over");
             // 게임 오버 처리 되어야함
         }
+
+        // 신은지 작업
+        m_FoodAmount += amount;
+        m_FoodLabel.text = "Food : " + m_FoodAmount;
+
+        if (m_FoodAmount <= 0)
+        {
+            PlayerController.GameOver();
+            m_GameOverPanel.style.visibility = Visibility.Visible;
+            m_GameOverMessage.text = "Game Over!\n\nYou traveled through " + m_CurrentLevel + " levels";
+
+        }
+    }
+
+    public void NewLevel()//신은지 작업
+    {
+        BoardManager.Clean();
+        BoardManager.Init();
+        PlayerController.Spawn(BoardManager, new Vector2Int(1, 1));
+
+        m_CurrentLevel++;
     }
 }

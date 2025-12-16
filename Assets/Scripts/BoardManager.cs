@@ -36,6 +36,9 @@ public class BoardManager : MonoBehaviour
     public WallObject WallPrefab;
     public FoodObject FoodPrefab;
 
+    // Exit 타일 설정(신은지)
+    public ExitCellObject ExitCellPrefab;
+
     // 첫 프레임 업데이트 이전에 한 번 호출
     void Start()
     {
@@ -114,6 +117,12 @@ public class BoardManager : MonoBehaviour
             }
         }
         m_EmptyCellsList.Remove(new Vector2Int(1, 1));
+
+        // 신은지 작업
+        Vector2Int endCoord = new Vector2Int(Width - 2, Height - 2);
+        AddObject(Instantiate(ExitCellPrefab), endCoord);
+        m_EmptyCellsList.Remove(endCoord);
+
         GenerateWall();
         GenerateFood();
     }
@@ -173,5 +182,28 @@ public class BoardManager : MonoBehaviour
     public void SetCellTile(Vector2Int cellIndex, Tile tile)
     {
         m_Tilemap.SetTile(new Vector3Int(cellIndex.x, cellIndex.y, 0), tile);
+    }
+
+    public void Clean()
+    {
+
+        if (m_BoardData == null)
+            return;
+
+
+        for (int y = 0; y < Height; ++y)
+        {
+            for (int x = 0; x < Width; ++x)
+            {
+                var cellData = m_BoardData[x, y];
+
+                if (cellData.ContainedObject != null)
+                {
+                    Destroy(cellData.ContainedObject.gameObject);
+                }
+
+                SetCellTile(new Vector2Int(x, y), null);
+            }
+        }
     }
 }

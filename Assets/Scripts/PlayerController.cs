@@ -18,6 +18,14 @@ public class PlayerController : MonoBehaviour
         get { return m_Cell; }
     }
 
+    private bool m_IsGameOver;
+
+    public void Init()
+    {
+        m_IsGameOver = false;
+    }
+
+
     // 보드 위에 플레이어를 처음 소환할 때 호출
     public void Spawn(BoardManager boardManager, Vector2Int cell)
     {
@@ -35,12 +43,31 @@ public class PlayerController : MonoBehaviour
         transform.position = m_Board.CellToWorld(m_CellPosition); // 셀 좌표 -> 유니티 화면
     }
 
+    public void GameOver()
+    {
+        m_IsGameOver = true;
+    }
+
     // 매 프레임마다 입력을 받아서 이동 처리
     private void Update()
     {
         // 기본값: 현재 위치에서 시작
         Vector2Int newCellTarget = m_CellPosition;
         bool hasMoved = false;     // 이번 프레임에 이동했는지 여부
+
+
+        //신은지 작업
+        if (m_IsGameOver)
+        {
+            if (Keyboard.current.enterKey.wasPressedThisFrame)
+            {
+                GameManager.Instance.StartNewGame();
+            }
+
+            return;
+        }
+
+
 
         // ↑ 키
         if (Keyboard.current.upArrowKey.wasPressedThisFrame)
@@ -80,5 +107,16 @@ public class PlayerController : MonoBehaviour
                 MoveTo(newCellTarget);
             }
         }
+
+        //신은지 작업
+        if (m_IsGameOver)
+        {
+            return;
+        }
     }
+
+    
+
+
+
 }
