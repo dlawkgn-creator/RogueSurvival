@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using System.Collections.Generic;
+using UnityEditor.SceneManagement;
 
 /// <summary>
 /// 게임 보드(Map)를 생성하고 관리하는 클래스
@@ -120,6 +121,7 @@ public class BoardManager : MonoBehaviour
 
         // 신은지 작업
         Vector2Int endCoord = new Vector2Int(Width - 2, Height - 2);
+
         AddObject(Instantiate(ExitCellPrefab), endCoord);
         m_EmptyCellsList.Remove(endCoord);
 
@@ -205,5 +207,13 @@ public class BoardManager : MonoBehaviour
                 SetCellTile(new Vector2Int(x, y), null);
             }
         }
+    }
+
+    void AddObject(CellObject obj, Vector2Int coord)
+    {
+        CellData data = m_BoardData[coord.x, coord.y];
+        obj.transform.position = CellToWorld(coord);
+        data.ContainedObject = obj;
+        obj.Init(coord);
     }
 }
