@@ -39,6 +39,8 @@ public class GameManager : MonoBehaviour
         m_GameOverPanel = UIDoc.rootVisualElement.Q<VisualElement>("GameOverPanel");
         m_GameOverMessage = m_GameOverPanel.Q<Label>("GameOverMessage");
 
+        SoundManager.Instance.Play();
+
         StartNewGame();
     }
 
