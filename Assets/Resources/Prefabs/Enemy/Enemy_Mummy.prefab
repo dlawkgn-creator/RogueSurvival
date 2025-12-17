@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7448251681662267683}
   - component: {fileID: 8972685068901365818}
   - component: {fileID: 7929849283324586339}
+  - component: {fileID: -2906094075181114726}
   m_Layer: 0
   m_Name: Enemy_Mummy
   m_TagString: Enemy
@@ -81,7 +82,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 9
-  m_Sprite: {fileID: -618180694, guid: e52264fb2fce17147842c19805d85136, type: 3}
+  m_Sprite: {fileID: -1129144313, guid: e52264fb2fce17147842c19805d85136, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -160,3 +161,16 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &-2906094075181114726
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1822919131891057379}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9009718ad0d6b443b36f53135b96386, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Enemy
+  Health: 8

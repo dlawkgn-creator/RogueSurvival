@@ -597,6 +597,8 @@ MonoBehaviour:
   WallTiles:
   - {fileID: 11400000, guid: 613092fdb3eeb324fb6bb32240d4b15b, type: 2}
   - {fileID: 11400000, guid: fbecf55f926c50f42b259ba1730cafa2, type: 2}
+  ExitCellPrefab: {fileID: 3547932603477368103, guid: 4b12b3ae60a114643a5a4258ccdcab46,
+    type: 3}
   FoodPrefab:
   - {fileID: -4361024794109315963, guid: 8068c177f0bdf3247a2c43047fe47022, type: 3}
   - {fileID: -1349308173018732429, guid: 32aa882e1c7038144bd9fff9a2d3b67d, type: 3}
@@ -608,10 +610,13 @@ MonoBehaviour:
   - {fileID: 5696495091320689452, guid: 5f46c3863cc8fef4c8aa1026528c0c16, type: 3}
   - {fileID: 1216789257227171990, guid: c1293ee52cd9ca4479cdbb4133048098, type: 3}
   - {fileID: 1964178638587941537, guid: 05b07f55520b71b4a801d7bcb07121d7, type: 3}
-  EnemyPrefab: {fileID: -2226137791566107472, guid: e2c4286f1d2fc124abaa93bb1d464569,
-    type: 3}
-  ExitCellPrefab: {fileID: 3547932603477368103, guid: 4b12b3ae60a114643a5a4258ccdcab46,
-    type: 3}
+  EnemyPrefab:
+  - {fileID: -6673719172848926985, guid: fdddeafc348340743b70a4276e1abba9, type: 3}
+  - {fileID: 1770395512834496500, guid: 059f4919ba788c6448c7f1c757c6fd75, type: 3}
+  - {fileID: -8474699341980949980, guid: eb95ee2f07a937f48b0a7779dfd89997, type: 3}
+  - {fileID: -2906094075181114726, guid: 0db8a1af9fe43d44d966b8016c6ffe8e, type: 3}
+  - {fileID: -2226137791566107472, guid: e2c4286f1d2fc124abaa93bb1d464569, type: 3}
+  EnemyCount: 3
 --- !u!156049354 &1464257178
 Grid:
   m_ObjectHideFlags: 0
@@ -640,13 +645,19 @@ Transform:
   - {fileID: 637105033}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1602404981 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1143184676479015395, guid: ae254346e9c433f40b2cf38ce76683b4,
+    type: 3}
+  m_PrefabInstance: {fileID: 1797157739}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1602404982 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: -3632688016906679966, guid: ae254346e9c433f40b2cf38ce76683b4,
     type: 3}
   m_PrefabInstance: {fileID: 1797157739}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1602404981}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 93007dae0fc46c34fb349e30b5773aff, type: 3}
@@ -658,6 +669,69 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1797157739}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1602404987
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1602404981}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.PlayerInput
+  m_Actions: {fileID: -944628639613478452, guid: 75939604ff9c3a44d9d18d78a8267041,
+    type: 3}
+  m_NotificationBehavior: 2
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1602404982}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: OnMove
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 4efc0df9-f0a7-487e-a65d-bd527bd4e5af
+    m_ActionName: 'PlayerMaps/Move[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d,/Keyboard/upArrow,/Keyboard/downArrow,/Keyboard/leftArrow,/Keyboard/rightArrow]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1602404982}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: OnRestart
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: e467042c-5e50-4f2d-97c6-35e373b46740
+    m_ActionName: 'PlayerMaps/Restart[/Keyboard/enter]'
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: 0e947258-ae04-4edd-933f-31c9a3e66246
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!1001 &1797157739
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -724,7 +798,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1143184676479015395, guid: ae254346e9c433f40b2cf38ce76683b4,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1602404987}
   m_SourcePrefab: {fileID: 100100000, guid: ae254346e9c433f40b2cf38ce76683b4, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

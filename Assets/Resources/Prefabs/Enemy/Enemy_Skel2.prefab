@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3002178763667241088}
   - component: {fileID: 8094623993087809023}
   - component: {fileID: 1484066438736270331}
+  - component: {fileID: -8474699341980949980}
   m_Layer: 0
   m_Name: Enemy_Skel2
   m_TagString: Enemy
@@ -160,3 +161,16 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &-8474699341980949980
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5129372765484799863}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9009718ad0d6b443b36f53135b96386, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Enemy
+  Health: 6
