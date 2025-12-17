@@ -82,7 +82,6 @@ public class GameManager : MonoBehaviour
         BoardManager.Clean();
         BoardManager.Init();
         PlayerController.Spawn(BoardManager, new Vector2Int(1, 1));
-
         m_CurrentLevel++;
     }
 }

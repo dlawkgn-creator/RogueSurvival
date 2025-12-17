@@ -21,6 +21,7 @@ public class BoardManager : MonoBehaviour
 
     public FoodObject[] FoodPrefab;
     public WallObject[] WallPrefab;
+    public Enemy EnemyPrefab;
     public ExitCellObject ExitCellPrefab;
     private List<Vector2Int> m_EmptyCellsList;
 
@@ -32,7 +33,6 @@ public class BoardManager : MonoBehaviour
         m_EmptyCellsList = new List<Vector2Int>();
 
         m_BoardData = new CellData[Width, Height];
-
 
         for (int y = 0; y < Height; ++y)
         {
@@ -59,7 +59,6 @@ public class BoardManager : MonoBehaviour
             }
         }
 
-        //remove the starting point of the player! It's not empty, the player is there
         m_EmptyCellsList.Remove(new Vector2Int(1, 1));
 
         Vector2Int endCoord = new Vector2Int(Width - 2, Height - 2);
@@ -68,6 +67,7 @@ public class BoardManager : MonoBehaviour
 
         GenerateWall();
         GenerateFood();
+        GenerateEnemy();
     }
 
     public Vector3 CellToWorld(Vector2Int cellIndex)
@@ -82,7 +82,6 @@ public class BoardManager : MonoBehaviour
         {
             return null;
         }
-
         return m_BoardData[cellIndex.x, cellIndex.y];
     }
 
@@ -93,7 +92,6 @@ public class BoardManager : MonoBehaviour
         {
             int randomIndex = Random.Range(0, m_EmptyCellsList.Count);
             Vector2Int coord = m_EmptyCellsList[randomIndex];
-
             m_EmptyCellsList.RemoveAt(randomIndex);
             int randomFoodIndex = Random.Range(0, FoodPrefab.Length);
             FoodObject newFood = Instantiate(FoodPrefab[randomFoodIndex]);
@@ -108,7 +106,6 @@ public class BoardManager : MonoBehaviour
         {
             int randomIndex = Random.Range(0, m_EmptyCellsList.Count);
             Vector2Int coord = m_EmptyCellsList[randomIndex];
-
             m_EmptyCellsList.RemoveAt(randomIndex);
             int randomWallIndex = Random.Range(0, WallPrefab.Length);
             WallObject newWall = Instantiate(WallPrefab[randomWallIndex]);
@@ -136,10 +133,8 @@ public class BoardManager : MonoBehaviour
 
     public void Clean()
     {
-        //no board data, so exit early, nothing to clean
         if (m_BoardData == null)
             return;
-
 
         for (int y = 0; y < Height; ++y)
         {
@@ -149,14 +144,24 @@ public class BoardManager : MonoBehaviour
 
                 if (cellData.ContainedObject != null)
                 {
-                    //CAREFUL! Destroy the GameObject NOT just cellData.ContainedObject
-                    //Otherwise what you are destroying is the JUST CellObject COMPONENT
-                    //and not the whole gameobject with sprite
                     Destroy(cellData.ContainedObject.gameObject);
                 }
-
                 SetCellTile(new Vector2Int(x, y), null);
             }
+        }
+    }
+
+    public void GenerateEnemy()
+    {
+        int enemyCount = 1;
+        for (int i = 0; i < enemyCount; ++i)
+        {
+            int randomIndex = Random.Range(0, m_EmptyCellsList.Count);
+            Vector2Int coord = m_EmptyCellsList[randomIndex];
+            m_EmptyCellsList.RemoveAt(randomIndex);
+
+            Enemy newEnemy = Instantiate(EnemyPrefab);
+            AddObject(newEnemy, coord);
         }
     }
 }

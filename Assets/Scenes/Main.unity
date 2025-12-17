@@ -456,6 +456,7 @@ GameObject:
   - component: {fileID: 1280436917}
   - component: {fileID: 1280436916}
   - component: {fileID: 1280436915}
+  - component: {fileID: 1280436918}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -537,6 +538,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1280436918
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1280436914}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03c562794bcb9b74e9fb280adc27c131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CameraFollow
+  Target: {fileID: 1602404986}
+  Offset: {x: 0, y: 0, z: -10}
+  SmoothSpeed: 10
 --- !u!1 &1464257176
 GameObject:
   m_ObjectHideFlags: 0
@@ -567,8 +583,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75a84992a6a74df4bb2080611403dc5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BoardManager
-  Width: 8
-  Height: 8
+  Width: 10
+  Height: 10
   GroundTiles:
   - {fileID: 11400000, guid: 474c21a3565a5b74f80ddbdfb6bb5b0e, type: 2}
   - {fileID: 11400000, guid: 0301b94c572a1a2449ded8fbc4eddcb9, type: 2}
@@ -592,6 +608,8 @@ MonoBehaviour:
   - {fileID: 5696495091320689452, guid: 5f46c3863cc8fef4c8aa1026528c0c16, type: 3}
   - {fileID: 1216789257227171990, guid: c1293ee52cd9ca4479cdbb4133048098, type: 3}
   - {fileID: 1964178638587941537, guid: 05b07f55520b71b4a801d7bcb07121d7, type: 3}
+  EnemyPrefab: {fileID: -2226137791566107472, guid: e2c4286f1d2fc124abaa93bb1d464569,
+    type: 3}
   ExitCellPrefab: {fileID: 3547932603477368103, guid: 4b12b3ae60a114643a5a4258ccdcab46,
     type: 3}
 --- !u!156049354 &1464257178
@@ -634,6 +652,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93007dae0fc46c34fb349e30b5773aff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
+--- !u!4 &1602404986 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7914328389439610340, guid: ae254346e9c433f40b2cf38ce76683b4,
+    type: 3}
+  m_PrefabInstance: {fileID: 1797157739}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1797157739
 PrefabInstance:
   m_ObjectHideFlags: 0
