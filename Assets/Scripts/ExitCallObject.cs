@@ -11,9 +11,9 @@ public class ExitCellObject : CellObject
         GameManager.Instance.BoardManager.SetCellTile(coord, EndTile);
     }
 
-    public override bool PlayerWantsToEnter()
+    public override void PlayerEntered()
     {
         GameManager.Instance.NewLevel();
-        return true;
+        Debug.Log("Reached the exit cell");
     }
 }

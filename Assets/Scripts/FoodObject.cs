@@ -2,9 +2,13 @@ using UnityEngine;
 
 public class FoodObject : CellObject
 {
-    public override bool PlayerWantsToEnter()
+    public int AmountGranted = 10;
+
+    public override void PlayerEntered()
     {
         Destroy(gameObject);
-        return true; // 이동 허용
+
+        //increase food
+        GameManager.Instance.ChangeFood(AmountGranted);
     }
 }

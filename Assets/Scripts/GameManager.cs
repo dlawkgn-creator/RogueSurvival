@@ -1,28 +1,19 @@
 using UnityEngine;
 using UnityEngine.UIElements;
 
-/// <summary>
-/// 게임 전체를 총괄하는 매니저 (Singleton)
-/// </summary>
 public class GameManager : MonoBehaviour
 {
-    public static GameManager Instance
-    {
-        get;
-        private set;
-    }
+    public static GameManager Instance { get; private set; }
 
     public BoardManager BoardManager;
     public PlayerController PlayerController;
 
     public TurnManager TurnManager { get; private set; }
     private int m_FoodAmount = 100;
-    public int Food = 100;
 
     public UIDocument UIDoc;
     private Label m_FoodLabel;
 
-    //신은지 작업
     private int m_CurrentLevel = 1;
 
     private VisualElement m_GameOverPanel;
@@ -30,7 +21,7 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        if(Instance != null)
+        if (Instance != null)
         {
             Destroy(gameObject);
             return;
@@ -39,33 +30,17 @@ public class GameManager : MonoBehaviour
         Instance = this;
     }
 
-    private void Start()
+    void Start()
     {
-        m_FoodLabel = UIDoc.rootVisualElement.Q<Label>("FoodLabel");
-        m_FoodLabel.text = $"Food : {m_FoodAmount}";
-
-        // 시작할 때 새로운 TurnManager를 생성
         TurnManager = new TurnManager();
         TurnManager.OnTick += OnTurnHappen;
 
-        BoardManager.Init();
-
-        // BoardManager와 2d x축 y축을 매개로 PlayerController 의 Spawn메서드로 캐릭터를 생성
-        PlayerController.Spawn(BoardManager, new Vector2Int(1, 1));
-
-        NewLevel();
-
         m_FoodLabel = UIDoc.rootVisualElement.Q<Label>("FoodLabel");
-        m_FoodLabel.text = "Food : " + m_FoodAmount;
 
-        //신은지 작업
         m_GameOverPanel = UIDoc.rootVisualElement.Q<VisualElement>("GameOverPanel");
         m_GameOverMessage = m_GameOverPanel.Q<Label>("GameOverMessage");
 
-        m_GameOverPanel.style.visibility = Visibility.Hidden;
-
         StartNewGame();
-
     }
 
     public void StartNewGame()
@@ -83,26 +58,13 @@ public class GameManager : MonoBehaviour
         PlayerController.Spawn(BoardManager, new Vector2Int(1, 1));
     }
 
-    // 턴마다 음식 감소 처리
-    private void OnTurnHappen()
+    void OnTurnHappen()
     {
-        m_FoodAmount -= 1;
-        m_FoodLabel.text = $"Food : {m_FoodAmount}";
-        Debug.Log($"현재 음식 수량 : {m_FoodAmount}");
+        ChangeFood(-1);
     }
 
     public void ChangeFood(int amount)
     {
-        Food += amount;
-        Debug.Log($"Food : {Food}");
-
-        if (Food <= 0)
-        {
-            Debug.Log("Game Over");
-            // 게임 오버 처리 되어야함
-        }
-
-        // 신은지 작업
         m_FoodAmount += amount;
         m_FoodLabel.text = "Food : " + m_FoodAmount;
 
@@ -110,12 +72,12 @@ public class GameManager : MonoBehaviour
         {
             PlayerController.GameOver();
             m_GameOverPanel.style.visibility = Visibility.Visible;
-            m_GameOverMessage.text = "Game Over!\n\nYou traveled through " + m_CurrentLevel + " levels";
-
+            m_GameOverMessage.text = "Game Over!\n\nSurvived " + m_CurrentLevel + " days";
         }
+
     }
 
-    public void NewLevel()//신은지 작업
+    public void NewLevel()
     {
         BoardManager.Clean();
         BoardManager.Init();
