@@ -101,28 +101,38 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
-        // 오브젝트가 있으면: 먼저 들어갈 수 있는지 판단
-        bool canEnter = cellData.ContainedObject.PlayerWantsToEnter();
+        // 오브젝트 참조를 먼저 잡아둠
+        var obj = cellData.ContainedObject;
+        if (obj == null) return;
+
+        // 먼저 들어갈 수 있는지 판단
+        bool canEnter = obj.PlayerWantsToEnter();
 
         if (canEnter)
         {
             // Food / Exit: 이동 + 처리
             MoveTo(targetCell);
             PlayMoveAnimOnce();
-            cellData.ContainedObject.PlayerEntered();
+            obj.PlayerEntered(); // obj로 호출 (cellData.ContainedObject 다시 안 씀)
         }
         else
         {
             // Enemy: 절대 이동하지 않음(자리 바뀜 방지 핵심)
-            animator.SetTrigger(AttackHash);
 
-            cellData.ContainedObject.OnPlayerAttack();
+            // 반격 데미지는 적이 죽어서 보드에서 빠지기 전에 먼저 받아둠
+            int counter = obj.GetCounterDamageToPlayer();
 
-            int counter = cellData.ContainedObject.GetCounterDamageToPlayer();
+            // 공격 모션
+            if (animator != null) animator.SetTrigger(AttackHash);
+
+            // 적에게 공격 적용 (여기서 적이 죽으면 cellData.ContainedObject가 null 될 수 있음)
+            obj.OnPlayerAttack();
+
+            // 반격 데미지 + 피격 모션
             if (counter > 0)
             {
                 GameManager.Instance.ChangeFood(-counter);
-                animator.SetTrigger(HitHash);
+                if (animator != null) animator.SetTrigger(HitHash);
             }
         }
     }
