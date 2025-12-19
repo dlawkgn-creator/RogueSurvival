@@ -11,6 +11,9 @@ public class PlayerController : MonoBehaviour
     private Vector2Int m_MoveRequest;
     private bool m_HasMoveRequest;
 
+    [Header("Direction")]
+    [SerializeField] private bool facingRight = true;
+
     [Header("Animation")]
     [SerializeField] private Animator animator;
     [SerializeField] private float moveAnimTime = 0.15f;
@@ -96,6 +99,8 @@ public class PlayerController : MonoBehaviour
         // ºó Ä­: ÀÌµ¿
         if (cellData.ContainedObject == null)
         {
+            UpdateFacing(m_MoveRequest);
+
             MoveTo(targetCell);
             PlayMoveAnimOnce();
             return;
@@ -110,6 +115,7 @@ public class PlayerController : MonoBehaviour
 
         if (canEnter)
         {
+            UpdateFacing(m_MoveRequest);
             // Food / Exit: ÀÌµ¿ + Ã³¸®
             MoveTo(targetCell);
             PlayMoveAnimOnce();
@@ -135,6 +141,27 @@ public class PlayerController : MonoBehaviour
                 if (animator != null) animator.SetTrigger(HitHash);
             }
         }
+    }
+
+    private void UpdateFacing(Vector2Int moveDir)
+    {
+        if(moveDir.x == 0)
+        {
+            return;
+        }
+
+        bool FaceRight = moveDir.x > 0;
+
+        if(FaceRight == facingRight)
+        {
+            return;
+        }
+
+        facingRight = FaceRight;
+
+        Vector3 scale = transform.localScale;
+        scale.x = Mathf.Abs(scale.x) * (facingRight ? 1 : -1);
+        transform.localScale = scale;
     }
 
     private void PlayMoveAnimOnce()
