@@ -17,6 +17,14 @@ public class SoundManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
 
         m_AudioSource = GetComponent<AudioSource>();
+
+        m_AudioSource.loop = true;
+        m_AudioSource.playOnAwake = true;
+    }
+
+    private void Start()
+    {
+        Play();
     }
 
     public void Play()
