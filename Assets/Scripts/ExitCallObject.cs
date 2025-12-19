@@ -11,6 +11,11 @@ public class ExitCellObject : CellObject
         GameManager.Instance.BoardManager.SetCellTile(coord, EndTile);
     }
 
+    public override bool PlayerWantsToEnter()
+    {
+        return true;
+    }
+
     public override void PlayerEntered()
     {
         GameManager.Instance.NewLevel();
