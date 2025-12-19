@@ -47,9 +47,6 @@ public class GameManager : MonoBehaviour
         TurnManager.OnTick += OnTurnHappen;
 
         ShowTitle();
-        //SoundManager.Instance.Play();
-
-        //StartNewGame();
     }
 
     public void ShowTitle()
@@ -82,23 +79,27 @@ public class GameManager : MonoBehaviour
 
     public void OnClickStart()
     {
+        SoundManager.Instance?.PlayUiClick();
         ShowPlaying();
         StartNewGame();
     }
 
     public void OnClickQuit()
     {
+        SoundManager.Instance?.PlayUiClick();
         Application.Quit();
     }
 
     public void OnClickRestart()
     {
+        SoundManager.Instance?.PlayUiClick();
         ShowPlaying();
         StartNewGame();
     }
 
     public void OnClickBackToTitle()
     {
+        SoundManager.Instance?.PlayUiClick();
         BoardManager.Clean();
         ShowTitle();
     }

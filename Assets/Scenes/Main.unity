@@ -364,6 +364,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SoundManager
   bgmSource: {fileID: 144073731}
   sfxSource: {fileID: 144073732}
+  uiClickSfx: {fileID: 8300000, guid: c9723a65e320f5d48a356a0073ad3e41, type: 3}
   foodSfx: {fileID: 8300000, guid: 4c3dafdede8305e47ab07eb1d0ab8d66, type: 3}
   moveSfx: {fileID: 8300000, guid: 57af66e3312ef3c4fb05047edc290e29, type: 3}
 --- !u!4 &144073730
@@ -2879,7 +2880,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.6698113, g: 0.6698113, b: 0.6698113, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

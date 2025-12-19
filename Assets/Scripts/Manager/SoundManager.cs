@@ -7,6 +7,7 @@ public class SoundManager : MonoBehaviour
     [Header("Audio Source")]
     [SerializeField] private AudioSource bgmSource;
     [SerializeField] private AudioSource sfxSource;
+    [SerializeField] private AudioClip uiClickSfx;
     [SerializeField] private AudioClip foodSfx;
     [SerializeField] private AudioClip moveSfx;
 
@@ -61,7 +62,7 @@ public class SoundManager : MonoBehaviour
 
     public void PlaySfx(AudioClip clip)
     {
-        if(clip == null)
+        if(clip == null || sfxSource == null)
         {
             return;
         }
@@ -80,5 +81,10 @@ public class SoundManager : MonoBehaviour
             return;
         }
         sfxSource.PlayOneShot(moveSfx);
+    }
+
+    public void PlayUiClick()
+    {
+        PlaySfx(uiClickSfx);
     }
 }
