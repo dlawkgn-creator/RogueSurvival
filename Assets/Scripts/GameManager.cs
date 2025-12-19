@@ -10,10 +10,19 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Slider foodSlider;
     [SerializeField] private int startFood = 100;
 
-    [Header("GameOver UI")]
+    [Header("Panels")]
     [SerializeField] private GameObject gameOverPanel;
+    [SerializeField] private GameObject titlePanel;
+
+    [Header("GameOver UI")]
     [SerializeField] private TMP_Text gameOverText;
     
+    private enum GameState
+    {
+        Title, Playing, GameOver
+    }
+    private GameState m_State;
+
     public TurnManager TurnManager { get; set; }
     public BoardManager BoardManager;
     public PlayerController PlayerController;
@@ -37,15 +46,65 @@ public class GameManager : MonoBehaviour
         TurnManager = new TurnManager();
         TurnManager.OnTick += OnTurnHappen;
 
-        SoundManager.Instance.Play();
+        ShowTitle();
+        //SoundManager.Instance.Play();
 
+        //StartNewGame();
+    }
+
+    public void ShowTitle()
+    {
+        m_State = GameState.Title;
+        Time.timeScale = 1f;
+
+        if (titlePanel) titlePanel.SetActive(true);
+        if (gameOverPanel) gameOverPanel.SetActive(false);
+    }
+
+    private void ShowPlaying()
+    {
+        m_State = GameState.Playing;
+        Time.timeScale = 1f;
+
+        if (titlePanel) titlePanel.SetActive(false);
+        if (gameOverPanel) gameOverPanel.SetActive(false);
+    }
+
+    void ShowGameOver(string msg)
+    {
+        m_State = GameState.GameOver;
+        Time.timeScale = 0f;
+
+        if (gameOverText) gameOverText.text = msg;
+        if (titlePanel) titlePanel.SetActive(false);
+        if (gameOverPanel) gameOverPanel.SetActive(true);
+    }
+
+    public void OnClickStart()
+    {
+        ShowPlaying();
         StartNewGame();
+    }
+
+    public void OnClickQuit()
+    {
+        Application.Quit();
+    }
+
+    public void OnClickRestart()
+    {
+        ShowPlaying();
+        StartNewGame();
+    }
+
+    public void OnClickBackToTitle()
+    {
+        BoardManager.Clean();
+        ShowTitle();
     }
 
     public void StartNewGame() // 새 게임 시작
     {
-        HideGameOver();
-
         m_CurrentLevel = 1;
         m_FoodAmount = 40;
 
@@ -65,27 +124,36 @@ public class GameManager : MonoBehaviour
 
     void OnTurnHappen()
     {
+        if(m_State != GameState.Playing)
+        {
+            return;
+        }
         ChangeFood(-1);
     }
 
     public void ChangeFood(int amount)
     {
-        if(PlayerController == null)
+        if(m_State != GameState.Playing)
         {
             return;
         }
 
+        if(PlayerController == null)
+        {
+            return;
+        }
+        
         m_FoodAmount += amount;
         if(m_FoodAmount < 0)
         {
             m_FoodAmount = 0;
         }
-
+        
         if(foodSlider != null)
         {
             foodSlider.value = m_FoodAmount;
         }
-
+        
         if (m_FoodAmount <= 0)
         {
             PlayerController.GameOver();
@@ -99,19 +167,6 @@ public class GameManager : MonoBehaviour
         BoardManager.Init();
         PlayerController.Spawn(BoardManager, new Vector2Int(1, 1));
         m_CurrentLevel++;
-    }
-
-    void ShowGameOver(string msg)
-    {
-        if(gameOverText != null)
-        {
-            gameOverText.text = msg;
-        }
-
-        if(gameOverPanel != null)
-        {
-            gameOverPanel.SetActive(true);
-        }
     }
 
     void HideGameOver()
