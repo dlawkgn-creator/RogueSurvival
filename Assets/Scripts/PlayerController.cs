@@ -103,6 +103,9 @@ public class PlayerController : MonoBehaviour
 
             MoveTo(targetCell);
             PlayMoveAnimOnce();
+
+            SoundManager.Instance?.PlayMove();
+
             return;
         }
 
@@ -119,6 +122,8 @@ public class PlayerController : MonoBehaviour
             // Food / Exit: 이동 + 처리
             MoveTo(targetCell);
             PlayMoveAnimOnce();
+
+            SoundManager.Instance?.PlayMove();
             obj.PlayerEntered(); // obj로 호출 (cellData.ContainedObject 다시 안 씀)
         }
         else

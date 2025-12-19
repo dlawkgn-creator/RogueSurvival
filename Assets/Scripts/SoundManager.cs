@@ -8,6 +8,7 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioSource bgmSource;
     [SerializeField] private AudioSource sfxSource;
     [SerializeField] private AudioClip foodSfx;
+    [SerializeField] private AudioClip moveSfx;
 
     private void Awake()
     {
@@ -49,6 +50,15 @@ public class SoundManager : MonoBehaviour
         bgmSource.volume = volume;
     }
 
+    public void SetSfxVolume(float volume)
+    {
+        if(sfxSource == null)
+        {
+            return;
+        }
+        sfxSource.volume = volume;
+    }
+
     public void PlaySfx(AudioClip clip)
     {
         if(clip == null)
@@ -61,5 +71,14 @@ public class SoundManager : MonoBehaviour
     public void PlayEatFood()
     {
         PlaySfx(foodSfx);
+    }
+
+    public void PlayMove()
+    {
+        if(moveSfx == null || sfxSource == null)
+        {
+            return;
+        }
+        sfxSource.PlayOneShot(moveSfx);
     }
 }

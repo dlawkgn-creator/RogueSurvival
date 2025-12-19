@@ -365,6 +365,7 @@ MonoBehaviour:
   bgmSource: {fileID: 144073731}
   sfxSource: {fileID: 144073732}
   foodSfx: {fileID: 8300000, guid: 4c3dafdede8305e47ab07eb1d0ab8d66, type: 3}
+  moveSfx: {fileID: 8300000, guid: 57af66e3312ef3c4fb05047edc290e29, type: 3}
 --- !u!4 &144073730
 Transform:
   m_ObjectHideFlags: 0
@@ -3578,6 +3579,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::VolumePanel
   volumePanel: {fileID: 829605155}
   bgmSlider: {fileID: 2069212091}
+  sfxSlider: {fileID: 1523664384}
 --- !u!4 &1968720758
 Transform:
   m_ObjectHideFlags: 0
