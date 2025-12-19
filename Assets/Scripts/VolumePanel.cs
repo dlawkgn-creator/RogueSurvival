@@ -45,7 +45,7 @@ public class VolumePanel : MonoBehaviour
     {
         if(SoundManager.Instance != null)
         {
-            SoundManager.Instance.SetVolume(value);
+            SoundManager.Instance.SetBgmVolume(value);
         }
     }
 }

@@ -4,7 +4,10 @@ public class SoundManager : MonoBehaviour
 {
     public static SoundManager Instance { get; private set; }
 
-    private AudioSource m_AudioSource;
+    [Header("Audio Source")]
+    [SerializeField] private AudioSource bgmSource;
+    [SerializeField] private AudioSource sfxSource;
+    [SerializeField] private AudioClip foodSfx;
 
     private void Awake()
     {
@@ -16,32 +19,47 @@ public class SoundManager : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(gameObject);
 
-        m_AudioSource = GetComponent<AudioSource>();
+        bgmSource.loop = true;
+        bgmSource.playOnAwake = true;
 
-        m_AudioSource.loop = true;
-        m_AudioSource.playOnAwake = true;
+        sfxSource.loop = false;
+        sfxSource.playOnAwake = false;
     }
 
     private void Start()
     {
-        Play();
+        PlayBgm();
     }
 
-    public void Play()
+    public void PlayBgm()
     {
-        if(!m_AudioSource.isPlaying)
+        if(!bgmSource.isPlaying)
         {
-            m_AudioSource.Play();
+            bgmSource.Play();
         }
     }
 
-    public void Stop()
+    public void StopBgm()
     {
-        m_AudioSource.Stop();
+        bgmSource.Stop();
     }
 
-    public void SetVolume(float volume)
+    public void SetBgmVolume(float volume)
     {
-        m_AudioSource.volume = volume;
+        bgmSource.volume = volume;
+    }
+
+    public void PlaySfx(AudioClip clip)
+    {
+        if(clip == null)
+        {
+            return;
+        }
+        sfxSource.PlayOneShot(clip);
+    }
+
+    public void PlayEatFood()
+    {
+        PlaySfx(foodSfx);
     }
 }

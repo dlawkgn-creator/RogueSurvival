@@ -13,6 +13,8 @@ public class FoodObject : CellObject
     {
         GameManager.Instance.ChangeFood(AmountGranted);
 
+        SoundManager.Instance.PlayEatFood();
+
         ClearFromBoard();
         Destroy(gameObject);
     }
