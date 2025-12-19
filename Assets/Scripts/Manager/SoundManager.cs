@@ -10,6 +10,7 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioClip uiClickSfx;
     [SerializeField] private AudioClip foodSfx;
     [SerializeField] private AudioClip moveSfx;
+    [SerializeField] private AudioClip hitSfx;
 
     private void Awake()
     {
@@ -86,5 +87,10 @@ public class SoundManager : MonoBehaviour
     public void PlayUiClick()
     {
         PlaySfx(uiClickSfx);
+    }
+
+    public void PlayHit()
+    {
+        PlaySfx(hitSfx);
     }
 }

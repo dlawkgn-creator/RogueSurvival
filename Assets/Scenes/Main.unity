@@ -367,6 +367,7 @@ MonoBehaviour:
   uiClickSfx: {fileID: 8300000, guid: c9723a65e320f5d48a356a0073ad3e41, type: 3}
   foodSfx: {fileID: 8300000, guid: 4c3dafdede8305e47ab07eb1d0ab8d66, type: 3}
   moveSfx: {fileID: 8300000, guid: 57af66e3312ef3c4fb05047edc290e29, type: 3}
+  hitSfx: {fileID: 8300000, guid: c1ba1822fe1d28147bcc025f1044a66b, type: 3}
 --- !u!4 &144073730
 Transform:
   m_ObjectHideFlags: 0

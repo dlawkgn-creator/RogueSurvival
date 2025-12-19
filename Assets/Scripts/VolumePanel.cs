@@ -33,11 +33,13 @@ public class VolumePanel : MonoBehaviour
 
     public void Open()
     {
+        SoundManager.Instance?.PlayUiClick();
         volumePanel.SetActive(true);
     }
 
     public void Close()
     {
+        SoundManager.Instance?.PlayUiClick();
         volumePanel.SetActive(false);
     }
 

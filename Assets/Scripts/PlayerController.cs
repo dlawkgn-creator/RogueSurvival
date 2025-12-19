@@ -133,6 +133,8 @@ public class PlayerController : MonoBehaviour
             // 반격 데미지는 적이 죽어서 보드에서 빠지기 전에 먼저 받아둠
             int counter = obj.GetCounterDamageToPlayer();
 
+            SoundManager.Instance?.PlayHit();
+
             // 공격 모션
             if (animator != null) animator.SetTrigger(AttackHash);
 
