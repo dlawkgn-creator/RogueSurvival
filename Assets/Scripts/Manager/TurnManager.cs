@@ -14,7 +14,6 @@ public class TurnManager
     public void Tick()
     {
         m_TurnCount += 1;
-        Debug.Log($"Current turn count : {m_TurnCount}");
 
         if (OnTick != null)
         {

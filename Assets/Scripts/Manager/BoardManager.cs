@@ -183,13 +183,11 @@ public class BoardManager : MonoBehaviour
 
             if (prefab == null)
             {
-                Debug.LogError($"[BoardManager] EnemyPrefabs[{prefabIndex}] °¡ null");
                 i--;
                 continue;
             }
 
             Enemy enemy = Instantiate(prefab);
-
 
             AddObject(enemy, coord);
         }
